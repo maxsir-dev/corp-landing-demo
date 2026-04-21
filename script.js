@@ -337,11 +337,74 @@
         io.observe(section);
     }
 
+    /* --- 6. WIPE (УДАЛИТЬ СЛЕДЫ) -------------------------- */
+    function initWipe() {
+        const btn = $("#wipe-btn");
+        if (!btn) return;
+
+        btn.addEventListener("click", async () => {
+            btn.disabled = true;
+
+            // Оверлей
+            const overlay = document.createElement("div");
+            overlay.className = "wipe-overlay";
+            overlay.innerHTML = [
+                '<div class="wipe-overlay__title">УДАЛЕНИЕ СЕАНСА...</div>',
+                '<div class="wipe-overlay__log" role="log"></div>',
+                '<div class="wipe-overlay__final">СЛЕДОВ НЕ ОБНАРУЖЕНО.</div>',
+                '<div class="wipe-overlay__signoff">// сессия завершена · архив опечатан</div>',
+            ].join("");
+            document.body.appendChild(overlay);
+
+            const log   = overlay.querySelector(".wipe-overlay__log");
+            const final_ = overlay.querySelector(".wipe-overlay__final");
+            const app   = $("#app");
+
+            // Корраптим фон и показываем оверлей
+            if (app) app.classList.add("is-corrupted");
+            await wait(30);
+            overlay.classList.add("is-active");
+
+            // Лог удалений
+            const targets = [
+                "/var/archive/mts/1993.log",
+                "/var/archive/mts/2000.log",
+                "/var/archive/mts/2010.log",
+                "/var/archive/mts/2020.log",
+                "/tmp/session.cookie",
+                "/tmp/ip.trace",
+                "/tmp/agent.fingerprint",
+                "/var/log/audit/session.log",
+            ];
+            for (const path of targets) {
+                const p = document.createElement("p");
+                p.className = "rm";
+                p.textContent = "[rm -f] " + path;
+                log.appendChild(p);
+                await wait(180);
+            }
+
+            // Подтверждение
+            await wait(300);
+            const ok = document.createElement("p");
+            ok.className = "ok";
+            ok.textContent = "[OK] 8 файлов удалено · 0 следов";
+            log.appendChild(ok);
+
+            // Успокаиваем экран, запечатываем оверлей, показываем финал
+            await wait(500);
+            if (app) app.classList.remove("is-corrupted");
+            overlay.classList.add("is-sealed");
+            final_.classList.add("is-shown");
+        });
+    }
+
     /* --- BOOT --------------------------------------------- */
     document.addEventListener("DOMContentLoaded", async () => {
         initScrollReveal();   // навешиваем наблюдателей заранее
         initAccess();
         initTerminal();
+        initWipe();
         await runLoading();
         await runHero();
     });

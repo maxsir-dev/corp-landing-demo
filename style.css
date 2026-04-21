@@ -428,6 +428,78 @@ body::after {
     transform: translateY(0);
 }
 
+/* --- 10b. WIPE OVERLAY --------------------------------- */
+.wipe-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(11, 15, 18, 0.85);
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, background-color 0.8s ease;
+}
+.wipe-overlay.is-active {
+    opacity: 1;
+    pointer-events: all;
+}
+.wipe-overlay.is-sealed {
+    background: #000;
+}
+.wipe-overlay__title {
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    color: var(--danger);
+    margin-bottom: 24px;
+    text-shadow: 0 0 10px rgba(255,59,59,0.4);
+}
+.wipe-overlay__log {
+    width: 100%;
+    max-width: 640px;
+    font-size: 13px;
+    font-family: var(--font-mono);
+    min-height: 200px;
+}
+.wipe-overlay__log p {
+    margin: 3px 0;
+    opacity: 0.9;
+}
+.wipe-overlay__log p.rm { color: var(--ink); }
+.wipe-overlay__log p.ok { color: var(--accent); }
+.wipe-overlay__final {
+    margin-top: 24px;
+    font-size: 16px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    text-align: center;
+}
+.wipe-overlay__final.is-shown { opacity: 1; }
+.wipe-overlay__signoff {
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--bg-2);
+    opacity: 0;
+    transition: opacity 1s ease 0.4s;
+}
+.wipe-overlay__final.is-shown + .wipe-overlay__signoff { opacity: 1; }
+
+.is-corrupted { animation: corrupt 0.22s steps(1) infinite; }
+@keyframes corrupt {
+    0%   { transform: translate(0, 0);      filter: none; }
+    20%  { transform: translate(-3px, 1px); filter: hue-rotate(25deg); }
+    40%  { transform: translate(2px, -2px); filter: invert(0.04); }
+    60%  { transform: translate(-1px, 2px); filter: saturate(1.8); }
+    80%  { transform: translate(3px, 0);    filter: hue-rotate(-20deg); }
+}
+
 /* --- 11. АДАПТИВ --------------------------------------- */
 @media (max-width: 640px) {
     .stamp { font-size: 10px; padding: 6px 10px; }
