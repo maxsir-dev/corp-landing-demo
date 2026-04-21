@@ -1,0 +1,20 @@
+/* ДОСЬЕ: МТС — стили
+   Концепция: бумажный архив КГБ
+   Наполнение добавляется на ШАГЕ 3 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    font-family: "Courier New", Courier, monospace;
+    background: #0B0F12;
+    color: #7A8A92;
+}
