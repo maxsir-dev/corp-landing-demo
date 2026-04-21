@@ -9,7 +9,134 @@
 </head>
 <body>
     <main id="app">
-        <!-- Секции добавятся на ШАГЕ 2 -->
+
+        <!-- 1. LOADING SCREEN -->
+        <section id="loading" class="screen screen--loading">
+            <div class="loading__inner">
+                <p class="loading__line loading__line--en">ACCESSING ARCHIVE...</p>
+                <p class="loading__line loading__line--ru">РАССЕКРЕЧИВАНИЕ ДАННЫХ...</p>
+                <div class="loading__bar">
+                    <span class="loading__bar-fill"></span>
+                </div>
+                <p class="loading__meta">ДЕЛО №1993-2026 / УРОВЕНЬ ДОСТУПА: 3</p>
+            </div>
+        </section>
+
+        <!-- 2. HERO -->
+        <section id="hero" class="screen screen--hero">
+            <div class="stamp stamp--top-secret">СОВЕРШЕННО СЕКРЕТНО</div>
+            <div class="stamp stamp--declassified">РАССЕКРЕЧЕНО 2026</div>
+
+            <header class="hero__header">
+                <p class="hero__label">ГОСУДАРСТВЕННЫЙ АРХИВ · ПАПКА №1993-2026</p>
+                <h1 class="hero__title">ДОСЬЕ: МТС</h1>
+                <p class="hero__subtitle">Мобильные ТелеСистемы. История под грифом.</p>
+            </header>
+
+            <div class="hero__meta">
+                <dl>
+                    <dt>Кодовое имя:</dt><dd>«Красный абонент»</dd>
+                    <dt>Дата основания:</dt><dd>28.10.1993</dd>
+                    <dt>Регион наблюдения:</dt><dd>СССР → РФ</dd>
+                    <dt>Статус дела:</dt><dd>ОТКРЫТО</dd>
+                </dl>
+            </div>
+
+            <button id="access-btn" class="btn btn--access" type="button">
+                ПОЛУЧИТЬ ДОСТУП
+            </button>
+        </section>
+
+        <!-- 3. TIMELINE -->
+        <section id="timeline" class="screen screen--timeline" hidden>
+            <h2 class="section__title">ХРОНОЛОГИЯ НАБЛЮДЕНИЙ</h2>
+
+            <article class="dossier" id="era-1993" data-era="1993">
+                <header class="dossier__header">
+                    <span class="dossier__code">ФАЙЛ 01</span>
+                    <h3 class="dossier__title">1993 — 2000</h3>
+                    <span class="dossier__tag">ЭПОХА: ЗАРОЖДЕНИЕ</span>
+                </header>
+                <div class="dossier__body">
+                    <p><strong>28 октября 1993 г.</strong> — регистрация АО «Мобильные ТелеСистемы». Учредители: МГТС, Siemens, DeTeMobil.</p>
+                    <p>1994 — запуск сети стандарта GSM-900 в Москве. Первые абоненты — номенклатура и иностранные специалисты.</p>
+                    <p>2000 — IPO на Нью-Йоркской фондовой бирже. Выход на международный рынок капитала.</p>
+                    <p class="dossier__note">Пометка на полях: «Связь контролируема. Абонентская база — стратегический ресурс.»</p>
+                </div>
+            </article>
+
+            <article class="dossier" id="era-2000" data-era="2000">
+                <header class="dossier__header">
+                    <span class="dossier__code">ФАЙЛ 02</span>
+                    <h3 class="dossier__title">2000 — 2010</h3>
+                    <span class="dossier__tag">ЭПОХА: ЭКСПАНСИЯ</span>
+                </header>
+                <div class="dossier__body">
+                    <p>2002 — выход в регионы СНГ: Украина, Узбекистан, Туркменистан.</p>
+                    <p>2004 — запуск бренда «МТС» в единой фирменной стилистике. Красно-белое «яйцо» как опознавательный знак.</p>
+                    <p>2008 — 100 миллионов абонентов в странах СНГ.</p>
+                    <p class="dossier__note">Пометка: «Красный квадрат виден из космоса.»</p>
+                </div>
+            </article>
+
+            <article class="dossier" id="era-2010" data-era="2010">
+                <header class="dossier__header">
+                    <span class="dossier__code">ФАЙЛ 03</span>
+                    <h3 class="dossier__title">2010 — 2020</h3>
+                    <span class="dossier__tag">ЭПОХА: ЦИФРОВИЗАЦИЯ</span>
+                </header>
+                <div class="dossier__body">
+                    <p>2012 — запуск сети LTE. Старт программы «МТС Банк».</p>
+                    <p>2015 — развитие собственной розничной сети, запуск МТС ТВ.</p>
+                    <p>2019 — анонс стратегии CLTV: экосистема услуг вместо оператора связи.</p>
+                    <p class="dossier__note">Пометка: «Объект более не является только оператором связи.»</p>
+                </div>
+            </article>
+
+            <article class="dossier" id="era-2020" data-era="2020">
+                <header class="dossier__header">
+                    <span class="dossier__code">ФАЙЛ 04</span>
+                    <h3 class="dossier__title">2020 — настоящее</h3>
+                    <span class="dossier__tag">ЭПОХА: ЭКОСИСТЕМА</span>
+                </header>
+                <div class="dossier__body">
+                    <p>2020 — запуск первой в РФ пилотной зоны 5G в Москве.</p>
+                    <p>2022 — ребрендинг: красный квадрат как единый символ экосистемы.</p>
+                    <p>2024+ — AI-сервисы, облачные платформы, MTS AI, финтех, медиа.</p>
+                    <p class="dossier__note">Пометка: «Объект вышел за пределы наблюдения.»</p>
+                </div>
+            </article>
+        </section>
+
+        <!-- 4. TERMINAL -->
+        <section id="terminal" class="screen screen--terminal" hidden>
+            <h2 class="section__title">ЗАШИФРОВАННЫЙ КАНАЛ</h2>
+            <p class="terminal__hint">Введите команду. Доступно: <code>help</code></p>
+
+            <div id="terminal-window" class="terminal">
+                <div id="terminal-output" class="terminal__output">
+                    <p class="terminal__line">[ СИСТЕМА ] Соединение установлено.</p>
+                    <p class="terminal__line">[ СИСТЕМА ] Введите 'help' для списка команд.</p>
+                </div>
+                <div class="terminal__input-row">
+                    <span class="terminal__prompt">archive@mts:~$</span>
+                    <input id="terminal-input" class="terminal__input" type="text"
+                           autocomplete="off" spellcheck="false" aria-label="Терминал ввода команды">
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. FINAL SCREEN -->
+        <section id="final" class="screen screen--final" hidden>
+            <div class="final__inner">
+                <h2 class="final__title">ВЫ ВИДЕЛИ СЛИШКОМ МНОГО</h2>
+                <p class="final__text">Протокол безопасности требует удаления вашей сессии.</p>
+                <button id="wipe-btn" class="btn btn--danger" type="button">
+                    УДАЛИТЬ СЛЕДЫ
+                </button>
+            </div>
+        </section>
+
     </main>
     <script src="script.js"></script>
 </body>
