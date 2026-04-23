@@ -265,6 +265,29 @@ ul { list-style: none; margin: 0; padding: 0; }
     flex-wrap: wrap;
 }
 
+.hero__stats {
+    margin: 56px 0 0;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 24px;
+    max-width: 640px;
+}
+.hero__stat { margin: 0; }
+.hero__stat-label {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-bottom: 6px;
+}
+.hero__stat-value {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+}
+
 /* --------------------------------------------------------------------------
    7. News
    -------------------------------------------------------------------------- */
