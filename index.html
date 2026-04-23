@@ -9,45 +9,423 @@
 </head>
 <body>
 
-    <!-- Header / Navigation -->
+    <!-- ==========  HEADER  ========== -->
     <header class="site-header">
-        <!-- sticky nav -->
+        <div class="container site-header__inner">
+            <a href="#hero" class="site-header__logo">
+                <span class="site-header__logo-mark">M</span>
+                <span class="site-header__logo-text">Интеграция&nbsp;дочерних&nbsp;компаний</span>
+            </a>
+
+            <button class="site-header__burger" type="button" aria-label="Открыть меню" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="site-nav" aria-label="Основная навигация">
+                <ul class="site-nav__list">
+                    <li><a href="#news">Новости</a></li>
+                    <li><a href="#active-projects">Активные проекты</a></li>
+                    <li><a href="#other-projects">Другие проекты</a></li>
+                    <li><a href="#info">Инфоресурсы</a></li>
+                    <li><a href="#team">Команда</a></li>
+                    <li><a href="#experts">Эксперты</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
 
-        <!-- 1. HERO -->
+        <!-- ==========  1. HERO  ========== -->
         <section id="hero" class="section hero">
+            <div class="container hero__inner">
+                <p class="hero__eyebrow">Внутренний портал команды</p>
+                <h1 class="hero__title">Интеграция дочерних компаний</h1>
+                <p class="hero__subtitle">
+                    Единое пространство для координации проектов, регламентов и экспертизы
+                    по интеграции дочерних компаний в периметр группы.
+                </p>
+                <div class="hero__actions">
+                    <a href="#active-projects" class="btn btn--primary">Перейти к проектам</a>
+                    <a href="#team" class="btn btn--ghost">Написать команде</a>
+                </div>
+            </div>
         </section>
 
-        <!-- 2. НОВОСТИ -->
+        <!-- ==========  2. НОВОСТИ  ========== -->
         <section id="news" class="section news">
+            <div class="container">
+                <header class="section__header">
+                    <h2 class="section__title">Новости</h2>
+                    <p class="section__subtitle">Последние события и обновления команды</p>
+                </header>
+
+                <div class="news__grid">
+                    <article class="news-card">
+                        <div class="news-card__meta">
+                            <time class="news-card__date" datetime="2026-04-18">18 апреля 2026</time>
+                            <span class="news-card__tag">Релиз</span>
+                        </div>
+                        <h3 class="news-card__title">Запущен единый дашборд интеграций</h3>
+                        <p class="news-card__text">Команда открыла доступ к сводному представлению статусов всех активных проектов.</p>
+                        <a href="#" class="news-card__link">Читать</a>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card__meta">
+                            <time class="news-card__date" datetime="2026-04-10">10 апреля 2026</time>
+                            <span class="news-card__tag">Процессы</span>
+                        </div>
+                        <h3 class="news-card__title">Обновлён регламент запуска интеграции</h3>
+                        <p class="news-card__text">Скорректированы чек-листы на этапах due diligence и технической подготовки.</p>
+                        <a href="#" class="news-card__link">Читать</a>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card__meta">
+                            <time class="news-card__date" datetime="2026-03-28">28 марта 2026</time>
+                            <span class="news-card__tag">Команда</span>
+                        </div>
+                        <h3 class="news-card__title">К команде присоединились два архитектора</h3>
+                        <p class="news-card__text">Усиление направления интеграционной архитектуры и безопасности данных.</p>
+                        <a href="#" class="news-card__link">Читать</a>
+                    </article>
+
+                    <article class="news-card">
+                        <div class="news-card__meta">
+                            <time class="news-card__date" datetime="2026-03-15">15 марта 2026</time>
+                            <span class="news-card__tag">Митап</span>
+                        </div>
+                        <h3 class="news-card__title">Внутренний митап по итогам Q1</h3>
+                        <p class="news-card__text">Разбор ключевых проектов, разбор ошибок и планы на второй квартал.</p>
+                        <a href="#" class="news-card__link">Читать</a>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <!-- 3. АКТИВНЫЕ ПРОЕКТЫ -->
+        <!-- ==========  3. АКТИВНЫЕ ПРОЕКТЫ  ========== -->
         <section id="active-projects" class="section active-projects">
+            <div class="container">
+                <header class="section__header">
+                    <h2 class="section__title">Проекты в активной работе</h2>
+                    <p class="section__subtitle">Текущие интеграции дочерних компаний</p>
+                </header>
+
+                <div class="filters" role="tablist" aria-label="Фильтр по статусу">
+                    <button class="filters__btn is-active" data-filter="all" role="tab" aria-selected="true">Все</button>
+                    <button class="filters__btn" data-filter="in-progress" role="tab" aria-selected="false">В работе</button>
+                    <button class="filters__btn" data-filter="testing" role="tab" aria-selected="false">Тестирование</button>
+                    <button class="filters__btn" data-filter="review" role="tab" aria-selected="false">На согласовании</button>
+                </div>
+
+                <div class="projects-grid">
+                    <article class="project-card" data-status="in-progress">
+                        <div class="project-card__header">
+                            <h3 class="project-card__title">Проект «Альфа-Линк»</h3>
+                            <span class="status-badge status-badge--in-progress">В работе</span>
+                        </div>
+                        <p class="project-card__text">Интеграция биллинга и корпоративной идентификации.</p>
+                        <div class="project-card__progress">
+                            <div class="project-card__progress-bar" style="--progress: 65%;"></div>
+                        </div>
+                        <div class="project-card__footer">
+                            <span class="project-card__owner">PM: Е. Никитина</span>
+                            <span class="project-card__phase">Этап 3 из 5</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-status="testing">
+                        <div class="project-card__header">
+                            <h3 class="project-card__title">Проект «Орион»</h3>
+                            <span class="status-badge status-badge--testing">Тестирование</span>
+                        </div>
+                        <p class="project-card__text">Миграция кадровых данных на единую HR-платформу.</p>
+                        <div class="project-card__progress">
+                            <div class="project-card__progress-bar" style="--progress: 85%;"></div>
+                        </div>
+                        <div class="project-card__footer">
+                            <span class="project-card__owner">PM: А. Волков</span>
+                            <span class="project-card__phase">Этап 4 из 5</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-status="review">
+                        <div class="project-card__header">
+                            <h3 class="project-card__title">Проект «Контур-М»</h3>
+                            <span class="status-badge status-badge--review">На согласовании</span>
+                        </div>
+                        <p class="project-card__text">Интеграция финансовой отчётности и ЭДО.</p>
+                        <div class="project-card__progress">
+                            <div class="project-card__progress-bar" style="--progress: 30%;"></div>
+                        </div>
+                        <div class="project-card__footer">
+                            <span class="project-card__owner">PM: Д. Соколова</span>
+                            <span class="project-card__phase">Этап 2 из 5</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-status="in-progress">
+                        <div class="project-card__header">
+                            <h3 class="project-card__title">Проект «Меридиан»</h3>
+                            <span class="status-badge status-badge--in-progress">В работе</span>
+                        </div>
+                        <p class="project-card__text">Объединение сервисных процессов технической поддержки.</p>
+                        <div class="project-card__progress">
+                            <div class="project-card__progress-bar" style="--progress: 50%;"></div>
+                        </div>
+                        <div class="project-card__footer">
+                            <span class="project-card__owner">PM: И. Терехов</span>
+                            <span class="project-card__phase">Этап 3 из 5</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-status="testing">
+                        <div class="project-card__header">
+                            <h3 class="project-card__title">Проект «Север»</h3>
+                            <span class="status-badge status-badge--testing">Тестирование</span>
+                        </div>
+                        <p class="project-card__text">Единая шина интеграций для региональных дочек.</p>
+                        <div class="project-card__progress">
+                            <div class="project-card__progress-bar" style="--progress: 78%;"></div>
+                        </div>
+                        <div class="project-card__footer">
+                            <span class="project-card__owner">PM: М. Лебедев</span>
+                            <span class="project-card__phase">Этап 4 из 5</span>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-status="review">
+                        <div class="project-card__header">
+                            <h3 class="project-card__title">Проект «Вектор»</h3>
+                            <span class="status-badge status-badge--review">На согласовании</span>
+                        </div>
+                        <p class="project-card__text">Подключение нового SaaS-провайдера к корпоративному SSO.</p>
+                        <div class="project-card__progress">
+                            <div class="project-card__progress-bar" style="--progress: 20%;"></div>
+                        </div>
+                        <div class="project-card__footer">
+                            <span class="project-card__owner">PM: К. Семёнова</span>
+                            <span class="project-card__phase">Этап 1 из 5</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <!-- 4. ДРУГИЕ ПРОЕКТЫ -->
+        <!-- ==========  4. ДРУГИЕ ПРОЕКТЫ  ========== -->
         <section id="other-projects" class="section other-projects">
+            <div class="container">
+                <header class="section__header">
+                    <h2 class="section__title">Другие проекты</h2>
+                    <p class="section__subtitle">Завершённые и приостановленные инициативы</p>
+                </header>
+
+                <ul class="other-grid">
+                    <li class="other-card">
+                        <span class="other-card__year">2025</span>
+                        <span class="other-card__name">Проект «Атлас»</span>
+                        <span class="other-card__tag">Завершён</span>
+                    </li>
+                    <li class="other-card">
+                        <span class="other-card__year">2025</span>
+                        <span class="other-card__name">Проект «Сигма»</span>
+                        <span class="other-card__tag">Завершён</span>
+                    </li>
+                    <li class="other-card">
+                        <span class="other-card__year">2024</span>
+                        <span class="other-card__name">Проект «Полюс»</span>
+                        <span class="other-card__tag">Завершён</span>
+                    </li>
+                    <li class="other-card">
+                        <span class="other-card__year">2024</span>
+                        <span class="other-card__name">Проект «Дельта»</span>
+                        <span class="other-card__tag">Приостановлен</span>
+                    </li>
+                    <li class="other-card">
+                        <span class="other-card__year">2024</span>
+                        <span class="other-card__name">Проект «Гранит»</span>
+                        <span class="other-card__tag">Завершён</span>
+                    </li>
+                    <li class="other-card">
+                        <span class="other-card__year">2023</span>
+                        <span class="other-card__name">Проект «Янтарь»</span>
+                        <span class="other-card__tag">Завершён</span>
+                    </li>
+                </ul>
+
+                <div class="other-projects__more">
+                    <button class="btn btn--ghost" type="button">Показать все</button>
+                </div>
+            </div>
         </section>
 
-        <!-- 5. ИНФОРМАЦИОННОЕ СОПРОВОЖДЕНИЕ -->
+        <!-- ==========  5. ИНФОРМАЦИОННОЕ СОПРОВОЖДЕНИЕ  ========== -->
         <section id="info" class="section info">
+            <div class="container">
+                <header class="section__header">
+                    <h2 class="section__title">Информационное сопровождение</h2>
+                    <p class="section__subtitle">Ссылки на внешние ресурсы и базы знаний</p>
+                </header>
+
+                <div class="info-grid">
+                    <a href="#" class="info-card" target="_blank" rel="noopener">
+                        <span class="info-card__icon" aria-hidden="true">C</span>
+                        <span class="info-card__title">Confluence команды</span>
+                        <span class="info-card__text">Регламенты, шаблоны и документация</span>
+                    </a>
+
+                    <a href="#" class="info-card" target="_blank" rel="noopener">
+                        <span class="info-card__icon" aria-hidden="true">J</span>
+                        <span class="info-card__title">Jira-борд</span>
+                        <span class="info-card__text">Задачи и отслеживание прогресса</span>
+                    </a>
+
+                    <a href="#" class="info-card" target="_blank" rel="noopener">
+                        <span class="info-card__icon" aria-hidden="true">Г</span>
+                        <span class="info-card__title">Гайды по интеграции</span>
+                        <span class="info-card__text">Пошаговые руководства и чек-листы</span>
+                    </a>
+
+                    <a href="#" class="info-card" target="_blank" rel="noopener">
+                        <span class="info-card__icon" aria-hidden="true">Б</span>
+                        <span class="info-card__title">База знаний</span>
+                        <span class="info-card__text">Решения типовых задач интеграции</span>
+                    </a>
+
+                    <a href="#" class="info-card" target="_blank" rel="noopener">
+                        <span class="info-card__icon" aria-hidden="true">T</span>
+                        <span class="info-card__title">Канал в Telegram</span>
+                        <span class="info-card__text">Оперативные обновления команды</span>
+                    </a>
+
+                    <a href="#" class="info-card" target="_blank" rel="noopener">
+                        <span class="info-card__icon" aria-hidden="true">А</span>
+                        <span class="info-card__title">Архитектурные решения</span>
+                        <span class="info-card__text">Принятые ADR и схемы</span>
+                    </a>
+                </div>
+            </div>
         </section>
 
-        <!-- 6. КОМАНДА -->
+        <!-- ==========  6. КОМАНДА  ========== -->
         <section id="team" class="section team">
+            <div class="container">
+                <header class="section__header">
+                    <h2 class="section__title">Команда</h2>
+                    <p class="section__subtitle">Те, кто ведёт интеграционные проекты</p>
+                </header>
+
+                <div class="team-grid">
+                    <article class="member-card">
+                        <div class="member-card__avatar" aria-hidden="true">ЕН</div>
+                        <h3 class="member-card__name">Елена Никитина</h3>
+                        <p class="member-card__role">Руководитель направления</p>
+                        <p class="member-card__bio">Координация портфеля интеграций, приоритезация и коммуникация с бизнесом.</p>
+                        <a href="mailto:#" class="member-card__contact">Написать</a>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-card__avatar" aria-hidden="true">АВ</div>
+                        <h3 class="member-card__name">Алексей Волков</h3>
+                        <p class="member-card__role">Главный архитектор</p>
+                        <p class="member-card__bio">Архитектура интеграционного ландшафта и принятие ADR.</p>
+                        <a href="mailto:#" class="member-card__contact">Написать</a>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-card__avatar" aria-hidden="true">ДС</div>
+                        <h3 class="member-card__name">Дарья Соколова</h3>
+                        <p class="member-card__role">Ведущий аналитик</p>
+                        <p class="member-card__bio">Бизнес-анализ, требования и моделирование процессов дочек.</p>
+                        <a href="mailto:#" class="member-card__contact">Написать</a>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-card__avatar" aria-hidden="true">ИТ</div>
+                        <h3 class="member-card__name">Иван Терехов</h3>
+                        <p class="member-card__role">DevOps-инженер</p>
+                        <p class="member-card__bio">Инфраструктура CI/CD и среды для интеграционного тестирования.</p>
+                        <a href="mailto:#" class="member-card__contact">Написать</a>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-card__avatar" aria-hidden="true">МЛ</div>
+                        <h3 class="member-card__name">Максим Лебедев</h3>
+                        <p class="member-card__role">Проектный менеджер</p>
+                        <p class="member-card__bio">Ведение проектов среднего масштаба и региональных интеграций.</p>
+                        <a href="mailto:#" class="member-card__contact">Написать</a>
+                    </article>
+
+                    <article class="member-card">
+                        <div class="member-card__avatar" aria-hidden="true">КС</div>
+                        <h3 class="member-card__name">Ксения Семёнова</h3>
+                        <p class="member-card__role">Аналитик данных</p>
+                        <p class="member-card__bio">Подготовка данных для миграции, контроль качества и сверки.</p>
+                        <a href="mailto:#" class="member-card__contact">Написать</a>
+                    </article>
+                </div>
+            </div>
         </section>
 
-        <!-- 7. КЛЮЧЕВЫЕ ЭКСПЕРТЫ -->
+        <!-- ==========  7. КЛЮЧЕВЫЕ ЭКСПЕРТЫ  ========== -->
         <section id="experts" class="section experts">
+            <div class="container">
+                <header class="section__header">
+                    <h2 class="section__title">Ключевые эксперты</h2>
+                    <p class="section__subtitle">Профильная экспертиза направления</p>
+                </header>
+
+                <div class="experts-grid">
+                    <article class="expert-card">
+                        <div class="expert-card__avatar" aria-hidden="true">ВП</div>
+                        <div class="expert-card__body">
+                            <h3 class="expert-card__name">Виктор Петров</h3>
+                            <p class="expert-card__role">Спонсор направления · Директор по развитию</p>
+                            <blockquote class="expert-card__quote">
+                                Интеграция — не про системы, а про то, как быстро дочка начинает приносить ценность группе.
+                            </blockquote>
+                            <a href="#" class="expert-card__link" target="_blank" rel="noopener">Профиль и публикации</a>
+                        </div>
+                    </article>
+
+                    <article class="expert-card">
+                        <div class="expert-card__avatar" aria-hidden="true">ОМ</div>
+                        <div class="expert-card__body">
+                            <h3 class="expert-card__name">Ольга Маркова</h3>
+                            <p class="expert-card__role">Главный архитектор группы</p>
+                            <blockquote class="expert-card__quote">
+                                Принципы важнее сервисов — архитектура живёт дольше любого конкретного инструмента.
+                            </blockquote>
+                            <a href="#" class="expert-card__link" target="_blank" rel="noopener">Профиль и публикации</a>
+                        </div>
+                    </article>
+
+                    <article class="expert-card">
+                        <div class="expert-card__avatar" aria-hidden="true">СК</div>
+                        <div class="expert-card__body">
+                            <h3 class="expert-card__name">Сергей Колесников</h3>
+                            <p class="expert-card__role">Эксперт по безопасности данных</p>
+                            <blockquote class="expert-card__quote">
+                                Безопасная интеграция начинается с правильной модели угроз, а не с настройки прав доступа.
+                            </blockquote>
+                            <a href="#" class="expert-card__link" target="_blank" rel="noopener">Профиль и публикации</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
+    <!-- ==========  FOOTER  ========== -->
     <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <p class="site-footer__text">© 2026 · Команда интеграции дочерних компаний</p>
+            <p class="site-footer__text site-footer__text--muted">Внутренний ресурс. Доступ только для сотрудников группы.</p>
+        </div>
     </footer>
 
     <script src="script.js"></script>
