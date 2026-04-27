@@ -18,14 +18,6 @@
     const SHEET_NAME = 'Компании';
     const SEARCH_DEBOUNCE = 150;
 
-    const STATUS_LABEL = {
-        planned:     'Запланировано',
-        in_progress: 'В работе',
-        completed:   'Завершено',
-        paused:      'Приостановлено',
-    };
-    const STATUS_ORDER = ['planned', 'in_progress', 'completed', 'paused'];
-
     const SIZE_LABEL = {
         S:  'S — до 50',
         M:  'M — 51-200',
@@ -36,12 +28,11 @@
 
     // Маппинг ключа колонки таблицы → префикс sort-ключа
     const HEADER_TO_SORT_PREFIX = {
-        shortName:         'name',
-        industry:          'industry',
-        region:            'region',
-        employees:         'size',
-        yearFounded:       'year',
-        integrationStatus: 'status',
+        shortName:   'name',
+        industry:    'industry',
+        region:      'region',
+        employees:   'size',
+        yearFounded: 'year',
     };
 
     const INDUSTRY_TO_CLASS = {
@@ -69,7 +60,6 @@
         search: '',
         filters: {
             industry: new Set(),
-            status:   new Set(),
             size:     new Set(),
             region:   new Set(),
         },
@@ -105,7 +95,6 @@
     }
 
     function industryClass(name) { return INDUSTRY_TO_CLASS[name] || ''; }
-    function statusLabel(status) { return STATUS_LABEL[status] || status; }
 
     function sizeOf(employees) {
         if (employees <= 50) return 'S';
@@ -196,7 +185,6 @@
         };
 
         state.filters.industry = new Set(csv('industry'));
-        state.filters.status   = new Set(csv('status'));
         state.filters.size     = new Set(csv('size'));
         state.filters.region   = new Set(csv('region'));
     }
@@ -209,7 +197,6 @@
         if (state.view === 'table') params.set('view', 'table');
 
         if (state.filters.industry.size) params.set('industry', Array.from(state.filters.industry).join(','));
-        if (state.filters.status.size)   params.set('status',   Array.from(state.filters.status).join(','));
         if (state.filters.size.size)     params.set('size',     Array.from(state.filters.size).join(','));
         if (state.filters.region.size)   params.set('region',   Array.from(state.filters.region).join(','));
 
@@ -264,7 +251,6 @@
 
         const f = state.filters;
         if (f.industry.size) items = items.filter(c => f.industry.has(c.industry));
-        if (f.status.size)   items = items.filter(c => f.status.has(c.integrationStatus));
         if (f.size.size)     items = items.filter(c => f.size.has(sizeOf(c.employees)));
         if (f.region.size)   items = items.filter(c => f.region.has(c.region));
 
@@ -279,7 +265,6 @@
     function sortItems(items, key) {
         const list = items.slice();
         const ru = (a, b) => String(a || '').localeCompare(String(b || ''), 'ru');
-        const statusIdx = c => STATUS_ORDER.indexOf(c.integrationStatus);
         switch (key) {
             case 'name_desc':     list.sort((a, b) => ru(b.shortName, a.shortName)); break;
             case 'size_desc':     list.sort((a, b) => b.employees - a.employees); break;
@@ -290,8 +275,6 @@
             case 'industry_desc': list.sort((a, b) => ru(b.industry, a.industry)); break;
             case 'region_asc':    list.sort((a, b) => ru(a.region, b.region)); break;
             case 'region_desc':   list.sort((a, b) => ru(b.region, a.region)); break;
-            case 'status_asc':    list.sort((a, b) => statusIdx(a) - statusIdx(b)); break;
-            case 'status_desc':   list.sort((a, b) => statusIdx(b) - statusIdx(a)); break;
             case 'name_asc':
             default:              list.sort((a, b) => ru(a.shortName, b.shortName)); break;
         }
@@ -301,7 +284,6 @@
     function hasActiveFilters() {
         return state.search.length > 0
             || state.filters.industry.size > 0
-            || state.filters.status.size > 0
             || state.filters.size.size > 0
             || state.filters.region.size > 0;
     }
@@ -309,7 +291,6 @@
     function resetFilters() {
         state.search = '';
         state.filters.industry.clear();
-        state.filters.status.clear();
         state.filters.size.clear();
         state.filters.region.clear();
 
@@ -341,17 +322,6 @@
                 label: name,
                 count: countBy(state.all, c => c.industry === name),
             }))
-        );
-
-        // status (фиксированный порядок)
-        renderFilterPanel('status',
-            STATUS_ORDER
-                .filter(s => state.all.some(c => c.integrationStatus === s))
-                .map(s => ({
-                    value: s,
-                    label: STATUS_LABEL[s],
-                    count: countBy(state.all, c => c.integrationStatus === s),
-                }))
         );
 
         // size (фиксированный порядок)
@@ -391,7 +361,7 @@
     }
 
     function updateFilterBadges() {
-        ['industry', 'status', 'size', 'region'].forEach(name => {
+        ['industry', 'size', 'region'].forEach(name => {
             const dropdown = document.querySelector(`.filter-dropdown[data-filter="${name}"]`);
             if (!dropdown) return;
             const badge = $('.filter-dropdown__count', dropdown);
@@ -428,7 +398,6 @@
                         <h3 class="company-card__name">${escapeHtml(c.shortName)}</h3>
                         <p class="company-card__legal">${escapeHtml(fullName(c))}</p>
                     </div>
-                    <span class="status-pill" data-status="${escapeHtml(c.integrationStatus)}">${escapeHtml(statusLabel(c.integrationStatus))}</span>
                 </div>
                 ${tagHtml}
                 <div class="company-card__meta">
@@ -461,7 +430,6 @@
                 <td>${escapeHtml(c.region)}</td>
                 <td>${c.employees}</td>
                 <td>${c.yearFounded || '—'}</td>
-                <td><span class="status-pill" data-status="${escapeHtml(c.integrationStatus)}">${escapeHtml(statusLabel(c.integrationStatus))}</span></td>
             </tr>
         `;
         const wrap = document.createElement('tbody');
@@ -675,9 +643,6 @@
         // Заголовок
         $('[data-modal-short-name]').textContent = c.shortName;
         $('[data-modal-full-name]').textContent = fullName(c);
-        const status = $('[data-modal-status]');
-        status.textContent = statusLabel(c.integrationStatus);
-        status.dataset.status = c.integrationStatus;
 
         // Панели
         renderLegalPanel(c);

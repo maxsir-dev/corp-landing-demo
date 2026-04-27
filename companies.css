@@ -8,12 +8,6 @@
    1. Tokens (страница-специфичные)
    -------------------------------------------------------------------------- */
 :root {
-    /* Статус интеграции компании */
-    --status-completed: #27AE60;
-    --status-progress:  #E67E22;
-    --status-planned:   #7F8C8D;
-    --status-paused:    #C0392B;
-
     /* Высота шапки + sticky-панели для scroll-padding */
     --controls-h: 88px;
 }
@@ -481,35 +475,6 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
 .tag-iot      { background: #4DB6AC; color: #FFFFFF; }
 .tag-ecom     { background: #E91E63; color: #FFFFFF; }
 .tag-gaming   { background: #5C6BC0; color: #FFFFFF; }
-
-/* --------------------------------------------------------------------------
-   9. Status pill (интеграция компании)
-   -------------------------------------------------------------------------- */
-.status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: var(--radius-pill);
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.4;
-    white-space: nowrap;
-    background-color: var(--color-bg-muted);
-    color: var(--color-text-secondary);
-}
-.status-pill::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: currentColor;
-    flex-shrink: 0;
-}
-.status-pill[data-status="completed"]   { background-color: #e7f6ed; color: var(--status-completed); }
-.status-pill[data-status="in_progress"] { background-color: #fdebd9; color: var(--status-progress); }
-.status-pill[data-status="planned"]     { background-color: #eceff1; color: var(--status-planned); }
-.status-pill[data-status="paused"]      { background-color: #fbe6e3; color: var(--status-paused); }
 
 /* --------------------------------------------------------------------------
    10. Skeleton loading
