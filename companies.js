@@ -436,16 +436,6 @@
                     <span class="company-card__meta-item">👥 ${escapeHtml(formatEmployees(c.employees))}</span>
                     <span class="company-card__meta-item">📅 ${c.yearFounded || '—'}</span>
                 </div>
-                <div class="company-card__progress">
-                    <div class="company-card__progress-label">Прогресс интеграции</div>
-                    <div class="progress-blocks">
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.HR)}" title="HR: ${escapeHtml(c.progress.HR)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.IT)}" title="IT: ${escapeHtml(c.progress.IT)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.finance)}" title="Финансы: ${escapeHtml(c.progress.finance)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.legal)}" title="Юр.: ${escapeHtml(c.progress.legal)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.security)}" title="Безопасность: ${escapeHtml(c.progress.security)}"></span>
-                    </div>
-                </div>
                 <button type="button" class="company-card__share" data-share="${escapeHtml(c.id)}" aria-label="Скопировать ссылку на компанию" title="Скопировать ссылку на компанию">🔗</button>
             </article>
         `;
@@ -472,15 +462,6 @@
                 <td>${c.employees}</td>
                 <td>${c.yearFounded || '—'}</td>
                 <td><span class="status-pill" data-status="${escapeHtml(c.integrationStatus)}">${escapeHtml(statusLabel(c.integrationStatus))}</span></td>
-                <td>
-                    <div class="progress-blocks">
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.HR)}" title="HR: ${escapeHtml(c.progress.HR)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.IT)}" title="IT: ${escapeHtml(c.progress.IT)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.finance)}" title="Финансы: ${escapeHtml(c.progress.finance)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.legal)}" title="Юр.: ${escapeHtml(c.progress.legal)}"></span>
-                        <span class="progress-block" data-state="${escapeHtml(c.progress.security)}" title="Безопасность: ${escapeHtml(c.progress.security)}"></span>
-                    </div>
-                </td>
             </tr>
         `;
         const wrap = document.createElement('tbody');
@@ -608,29 +589,6 @@
        Modal
        ---------------------------------------------------------------------- */
 
-    const BLOCK_LABEL = {
-        not_started: 'Не начато',
-        in_progress: 'В работе',
-        completed:   'Завершено',
-    };
-    const BLOCK_TO_PILL_STATUS = {
-        not_started: 'planned',
-        in_progress: 'in_progress',
-        completed:   'completed',
-    };
-    const BLOCK_ICON = {
-        completed:   '✓',
-        in_progress: '⟳',
-        not_started: '○',
-    };
-    const PROGRESS_BLOCKS = [
-        { key: 'HR',       label: 'HR' },
-        { key: 'IT',       label: 'IT' },
-        { key: 'finance',  label: 'Финансы' },
-        { key: 'legal',    label: 'Юридический' },
-        { key: 'security', label: 'Безопасность' },
-    ];
-
     function detailRow(label, value, opts) {
         opts = opts || {};
         const isEmpty = value === '' || value == null;
@@ -695,29 +653,6 @@
         `;
     }
 
-    function renderProgressPanel(c) {
-        const panel = document.querySelector('.modal__panel[data-panel="progress"]');
-        panel.innerHTML = `
-            <div class="progress-list">
-                ${PROGRESS_BLOCKS.map(b => {
-                    const s = c.progress[b.key] || 'not_started';
-                    const pillStatus = BLOCK_TO_PILL_STATUS[s] || 'planned';
-                    const label = BLOCK_LABEL[s] || s;
-                    const icon = BLOCK_ICON[s] || '';
-                    return `
-                        <div class="progress-list__row">
-                            <span class="progress-list__name">
-                                <span class="progress-list__icon" aria-hidden="true">${icon}</span>
-                                ${escapeHtml(b.label)}
-                            </span>
-                            <span class="status-pill" data-status="${pillStatus}">${escapeHtml(label)}</span>
-                        </div>
-                    `;
-                }).join('')}
-            </div>
-        `;
-    }
-
     function setActiveTab(name) {
         state.activeTab = name;
         $$('.modal__tab').forEach(tab => {
@@ -748,7 +683,6 @@
         renderLegalPanel(c);
         renderContactsPanel(c);
         renderSystemsPanel(c);
-        renderProgressPanel(c);
 
         // На первый таб
         setActiveTab('legal');

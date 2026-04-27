@@ -14,11 +14,6 @@
     --status-planned:   #7F8C8D;
     --status-paused:    #C0392B;
 
-    /* Прогресс блока (квадратики) */
-    --block-completed:   #27AE60;
-    --block-progress:    #E67E22;
-    --block-not_started: #BDC3C7;
-
     /* Высота шапки + sticky-панели для scroll-padding */
     --controls-h: 88px;
 }
@@ -459,33 +454,6 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
     gap: 4px;
 }
 
-.company-card__progress {
-    margin-top: auto;
-    padding-top: 14px;
-    border-top: 1px dashed var(--color-border);
-}
-.company-card__progress-label {
-    font-size: 11px;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 6px;
-}
-.progress-blocks {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
-}
-.progress-block {
-    height: 8px;
-    border-radius: 3px;
-    background-color: var(--block-not_started);
-    position: relative;
-}
-.progress-block[data-state="completed"]   { background-color: var(--block-completed); }
-.progress-block[data-state="in_progress"] { background-color: var(--block-progress); }
-.progress-block[data-state="not_started"] { background-color: var(--block-not_started); }
-
 /* --------------------------------------------------------------------------
    8. Industry tags (мягкие)
    -------------------------------------------------------------------------- */
@@ -577,11 +545,6 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
 .skeleton--w70 { width: 70%; }
 .skeleton--w90 { width: 90%; }
 .skeleton--tag { height: 22px; width: 110px; border-radius: var(--radius-pill); }
-.skeleton--blocks {
-    height: 8px;
-    width: 100%;
-    margin-top: 12px;
-}
 
 /* --------------------------------------------------------------------------
    11. Empty / error states
@@ -658,11 +621,6 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
     vertical-align: middle;
 }
 .catalog-table tbody tr:last-child td { border-bottom: 0; }
-.catalog-table .progress-blocks {
-    grid-template-columns: repeat(5, 12px);
-    gap: 4px;
-}
-
 .catalog-table__name {
     font-weight: 600;
     color: var(--color-text);
@@ -821,31 +779,6 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
     text-decoration: underline;
 }
 .detail-list dd.is-empty { color: var(--color-text-muted); font-style: italic; }
-
-/* Progress list (modal panel) */
-.progress-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.progress-list__row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 14px 16px;
-    background-color: var(--color-bg-soft);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-}
-.progress-list__name {
-    font-size: 14px;
-    font-weight: 500;
-}
-.progress-list__icon {
-    margin-right: 8px;
-    font-size: 16px;
-}
 
 /* --------------------------------------------------------------------------
    14. Toast
