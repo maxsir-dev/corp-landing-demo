@@ -689,6 +689,83 @@ ul { list-style: none; margin: 0; padding: 0; }
 .expert-card__link:hover { color: var(--color-accent-hover); }
 
 /* --------------------------------------------------------------------------
+   13.5. Companies banner (CTA на каталог дочерних компаний)
+   -------------------------------------------------------------------------- */
+.companies-banner {
+    padding: 56px 0;
+    background:
+        radial-gradient(circle at 90% 50%, rgba(227, 6, 19, 0.18), transparent 55%),
+        linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #fff;
+}
+.companies-banner .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.companies-banner .banner-text {
+    max-width: 680px;
+    flex: 1 1 320px;
+}
+.companies-banner .banner-eyebrow {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 16px;
+    border-radius: var(--radius-pill);
+    background-color: rgba(227, 6, 19, 0.18);
+    color: #ff8a91;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+.companies-banner .banner-title {
+    font-size: clamp(24px, 2.8vw, 32px);
+    margin: 0 0 12px;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+.companies-banner .banner-desc {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 580px;
+}
+.companies-banner .banner-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 24px;
+    background-color: var(--color-accent);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 500;
+    flex-shrink: 0;
+    transition: background-color var(--transition), transform var(--transition),
+                box-shadow var(--transition);
+}
+.companies-banner .banner-cta:hover {
+    background-color: var(--color-accent-hover);
+    color: #fff;
+    transform: translateX(4px);
+    box-shadow: 0 8px 24px rgba(227, 6, 19, 0.25);
+}
+@media (max-width: 720px) {
+    .companies-banner { padding: 40px 0; }
+    .companies-banner .banner-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+    }
+    .companies-banner .banner-cta {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* --------------------------------------------------------------------------
    14. Footer
    -------------------------------------------------------------------------- */
 .site-footer {

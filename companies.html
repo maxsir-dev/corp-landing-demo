@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог дочерних компаний — Интеграция дочерних компаний</title>
+    <meta name="description" content="Полный реестр дочерних компаний группы МТС с юридическими данными, контактами и статусами интеграции">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="companies.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+    <script src="companies.js" defer></script>
+</head>
+<body>
+
+    <!-- ==========  HEADER  ========== -->
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a href="index.html" class="site-header__logo">
+                <span class="site-header__logo-mark">M</span>
+                <span class="site-header__logo-text">Интеграция&nbsp;дочерних&nbsp;компаний</span>
+            </a>
+
+            <button class="site-header__burger" type="button" aria-label="Открыть меню" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="site-nav" aria-label="Основная навигация">
+                <ul class="site-nav__list">
+                    <li><a href="index.html#news">Новости</a></li>
+                    <li><a href="index.html#active-projects">Активные проекты</a></li>
+                    <li><a href="index.html#other-projects">Другие проекты</a></li>
+                    <li><a href="companies.html" class="is-active" aria-current="page">Каталог дочек</a></li>
+                    <li><a href="index.html#info">Инфоресурсы</a></li>
+                    <li><a href="index.html#team">Команда</a></li>
+                    <li><a href="index.html#experts">Эксперты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ==========  BREADCRUMBS  ========== -->
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <div class="container">
+                <ol class="breadcrumbs__list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li aria-current="page">Каталог дочерних компаний</li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- ==========  CATALOG HEADER  ========== -->
+        <section class="catalog-header">
+            <div class="container catalog-header__inner">
+                <div class="catalog-header__text">
+                    <h1 class="catalog-header__title">Каталог дочерних компаний</h1>
+                    <p class="catalog-header__subtitle">
+                        Полный реестр компаний группы МТС с актуальной юридической информацией,
+                        контактами и статусом интеграции. Источник данных — Excel-файл в репозитории,
+                        обновляется командой интеграции.
+                    </p>
+                </div>
+
+                <div class="catalog-header__meta">
+                    <div class="catalog-counter" aria-live="polite">
+                        Показано <strong data-counter-shown>—</strong> из <strong data-counter-total>—</strong>
+                    </div>
+                    <a href="data/companies.xlsx" download class="btn btn--ghost catalog-download" title="Скачать Excel-файл реестра">
+                        <span aria-hidden="true">📥</span>
+                        <span>Скачать Excel</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========  CONTROLS  ========== -->
+        <section class="catalog-controls" aria-label="Поиск и фильтры">
+            <div class="container catalog-controls__inner">
+                <div class="catalog-search">
+                    <input
+                        type="search"
+                        id="catalog-search-input"
+                        class="catalog-search__input"
+                        placeholder="Поиск по названию, ИНН или ОГРН..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                </div>
+
+                <div class="catalog-filters" role="group" aria-label="Фильтры">
+                    <details class="filter-dropdown" data-filter="industry">
+                        <summary class="filter-dropdown__summary">
+                            <span class="filter-dropdown__label">Отрасль</span>
+                            <span class="filter-dropdown__count" hidden></span>
+                            <span class="filter-dropdown__chevron" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="filter-dropdown__panel" data-filter-options></div>
+                    </details>
+
+                    <details class="filter-dropdown" data-filter="status">
+                        <summary class="filter-dropdown__summary">
+                            <span class="filter-dropdown__label">Статус интеграции</span>
+                            <span class="filter-dropdown__count" hidden></span>
+                            <span class="filter-dropdown__chevron" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="filter-dropdown__panel" data-filter-options></div>
+                    </details>
+
+                    <details class="filter-dropdown" data-filter="size">
+                        <summary class="filter-dropdown__summary">
+                            <span class="filter-dropdown__label">Размер</span>
+                            <span class="filter-dropdown__count" hidden></span>
+                            <span class="filter-dropdown__chevron" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="filter-dropdown__panel" data-filter-options></div>
+                    </details>
+
+                    <details class="filter-dropdown" data-filter="region">
+                        <summary class="filter-dropdown__summary">
+                            <span class="filter-dropdown__label">Регион</span>
+                            <span class="filter-dropdown__count" hidden></span>
+                            <span class="filter-dropdown__chevron" aria-hidden="true">▾</span>
+                        </summary>
+                        <div class="filter-dropdown__panel" data-filter-options></div>
+                    </details>
+
+                    <button type="button" class="filter-reset" data-filter-reset hidden>
+                        Сбросить фильтры
+                    </button>
+                </div>
+
+                <div class="catalog-tools">
+                    <div class="catalog-view-toggle" role="group" aria-label="Режим отображения">
+                        <button type="button" class="view-toggle__btn is-active" data-view="grid" aria-pressed="true" title="Сетка">
+                            <span aria-hidden="true">▦</span>
+                            <span class="visually-hidden">Сетка</span>
+                        </button>
+                        <button type="button" class="view-toggle__btn" data-view="table" aria-pressed="false" title="Таблица">
+                            <span aria-hidden="true">☰</span>
+                            <span class="visually-hidden">Таблица</span>
+                        </button>
+                    </div>
+
+                    <label class="catalog-sort">
+                        <span class="visually-hidden">Сортировка</span>
+                        <select class="catalog-sort__select" data-sort>
+                            <option value="name_asc">Название А-Я</option>
+                            <option value="name_desc">Название Я-А</option>
+                            <option value="size_desc">Размер: больше → меньше</option>
+                            <option value="size_asc">Размер: меньше → больше</option>
+                            <option value="year_desc">Год: новые → старые</option>
+                            <option value="year_asc">Год: старые → новые</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========  CONTENT  ========== -->
+        <section class="catalog-content">
+            <div class="container">
+
+                <!-- Состояние ошибки -->
+                <div class="catalog-error" data-state-error hidden>
+                    <h2 class="catalog-error__title">Не удалось загрузить реестр компаний</h2>
+                    <p class="catalog-error__text">
+                        Обновите страницу или
+                        <a href="data/companies.xlsx" download>скачайте Excel напрямую</a>.
+                    </p>
+                </div>
+
+                <!-- Сетка карточек (default state — 6 скелетонов) -->
+                <div class="catalog-grid" data-view-grid>
+                    <div class="company-card company-card--skeleton" aria-hidden="true">
+                        <div class="skeleton skeleton--line skeleton--w70"></div>
+                        <div class="skeleton skeleton--line skeleton--w50"></div>
+                        <div class="skeleton skeleton--tag"></div>
+                        <div class="skeleton skeleton--line skeleton--w90"></div>
+                        <div class="skeleton skeleton--blocks"></div>
+                    </div>
+                    <div class="company-card company-card--skeleton" aria-hidden="true">
+                        <div class="skeleton skeleton--line skeleton--w70"></div>
+                        <div class="skeleton skeleton--line skeleton--w50"></div>
+                        <div class="skeleton skeleton--tag"></div>
+                        <div class="skeleton skeleton--line skeleton--w90"></div>
+                        <div class="skeleton skeleton--blocks"></div>
+                    </div>
+                    <div class="company-card company-card--skeleton" aria-hidden="true">
+                        <div class="skeleton skeleton--line skeleton--w70"></div>
+                        <div class="skeleton skeleton--line skeleton--w50"></div>
+                        <div class="skeleton skeleton--tag"></div>
+                        <div class="skeleton skeleton--line skeleton--w90"></div>
+                        <div class="skeleton skeleton--blocks"></div>
+                    </div>
+                    <div class="company-card company-card--skeleton" aria-hidden="true">
+                        <div class="skeleton skeleton--line skeleton--w70"></div>
+                        <div class="skeleton skeleton--line skeleton--w50"></div>
+                        <div class="skeleton skeleton--tag"></div>
+                        <div class="skeleton skeleton--line skeleton--w90"></div>
+                        <div class="skeleton skeleton--blocks"></div>
+                    </div>
+                    <div class="company-card company-card--skeleton" aria-hidden="true">
+                        <div class="skeleton skeleton--line skeleton--w70"></div>
+                        <div class="skeleton skeleton--line skeleton--w50"></div>
+                        <div class="skeleton skeleton--tag"></div>
+                        <div class="skeleton skeleton--line skeleton--w90"></div>
+                        <div class="skeleton skeleton--blocks"></div>
+                    </div>
+                    <div class="company-card company-card--skeleton" aria-hidden="true">
+                        <div class="skeleton skeleton--line skeleton--w70"></div>
+                        <div class="skeleton skeleton--line skeleton--w50"></div>
+                        <div class="skeleton skeleton--tag"></div>
+                        <div class="skeleton skeleton--line skeleton--w90"></div>
+                        <div class="skeleton skeleton--blocks"></div>
+                    </div>
+                </div>
+
+                <!-- Табличный режим (скрыт по умолчанию) -->
+                <div class="catalog-table-wrap" data-view-table hidden>
+                    <table class="catalog-table">
+                        <thead>
+                            <tr>
+                                <th data-sort-key="shortName" class="is-sortable">Название</th>
+                                <th data-sort-key="industry" class="is-sortable">Отрасль</th>
+                                <th data-sort-key="region" class="is-sortable">Регион</th>
+                                <th data-sort-key="employees" class="is-sortable">Сотр.</th>
+                                <th data-sort-key="yearFounded" class="is-sortable">Год</th>
+                                <th data-sort-key="integrationStatus" class="is-sortable">Статус</th>
+                                <th>Прогресс</th>
+                            </tr>
+                        </thead>
+                        <tbody data-table-body></tbody>
+                    </table>
+                </div>
+
+                <!-- Пустое состояние (нет результатов фильтрации) -->
+                <div class="catalog-empty" data-state-empty hidden>
+                    <h2 class="catalog-empty__title">Ничего не найдено</h2>
+                    <p class="catalog-empty__text">Попробуйте изменить условия поиска или сбросить фильтры.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========  MODAL  ========== -->
+    <div class="modal" data-modal hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal__backdrop" data-modal-close></div>
+        <div class="modal__dialog" role="document">
+            <header class="modal__header">
+                <div class="modal__heading">
+                    <h2 class="modal__title" id="modal-title" data-modal-short-name></h2>
+                    <p class="modal__subtitle" data-modal-full-name></p>
+                </div>
+                <span class="status-pill" data-modal-status></span>
+                <button type="button" class="modal__close" data-modal-close aria-label="Закрыть">×</button>
+            </header>
+
+            <nav class="modal__tabs" role="tablist" aria-label="Разделы карточки">
+                <button type="button" class="modal__tab is-active" role="tab" data-tab="legal" aria-selected="true">Юр. информация</button>
+                <button type="button" class="modal__tab" role="tab" data-tab="contacts" aria-selected="false">Контакты</button>
+                <button type="button" class="modal__tab" role="tab" data-tab="systems" aria-selected="false">Системы</button>
+                <button type="button" class="modal__tab" role="tab" data-tab="progress" aria-selected="false">Прогресс интеграции</button>
+            </nav>
+
+            <div class="modal__body">
+                <section class="modal__panel is-active" data-panel="legal" role="tabpanel"></section>
+                <section class="modal__panel" data-panel="contacts" role="tabpanel" hidden></section>
+                <section class="modal__panel" data-panel="systems" role="tabpanel" hidden></section>
+                <section class="modal__panel" data-panel="progress" role="tabpanel" hidden></section>
+            </div>
+
+            <footer class="modal__footer">
+                <button type="button" class="btn btn--ghost" data-modal-share>Скопировать ссылку на компанию</button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ==========  TOAST  ========== -->
+    <div class="toast-container" data-toast-container aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==========  FOOTER  ========== -->
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <p class="site-footer__text">© 2026 · Команда интеграции дочерних компаний</p>
+            <p class="site-footer__text site-footer__text--muted">Внутренний ресурс. Доступ только для сотрудников группы.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="widget/widget.js" data-backend-url="https://integration-bot-production.up.railway.app" defer></script>
+</body>
+</html>
