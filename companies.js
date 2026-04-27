@@ -446,7 +446,7 @@
                         <span class="progress-block" data-state="${escapeHtml(c.progress.security)}" title="Безопасность: ${escapeHtml(c.progress.security)}"></span>
                     </div>
                 </div>
-                <button type="button" class="company-card__share" data-share="${escapeHtml(c.id)}" aria-label="Скопировать ссылку на компанию" title="Скопировать ссылку">⎘</button>
+                <button type="button" class="company-card__share" data-share="${escapeHtml(c.id)}" aria-label="Скопировать ссылку на компанию" title="Скопировать ссылку на компанию">🔗</button>
             </article>
         `;
 
@@ -571,7 +571,7 @@
         setTimeout(() => {
             el.classList.add('is-leaving');
             setTimeout(() => el.remove(), 220);
-        }, 2200);
+        }, 2000);
     }
 
     function shareCompanyLink(id) {
@@ -580,7 +580,7 @@
         url.search = '?company=' + encodeURIComponent(id);
         const link = url.toString();
 
-        const done = () => toast('Скопировано ✓');
+        const done = () => toast('Ссылка скопирована');
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(link).then(done).catch(() => fallbackCopy(link, done));
         } else {

@@ -419,23 +419,30 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
 
 .company-card__share {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: var(--radius-sm);
     background-color: transparent;
     border: 1px solid transparent;
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 1;
     transition: background-color var(--transition), color var(--transition),
-                border-color var(--transition);
+                border-color var(--transition), transform var(--transition);
 }
-.company-card__share:hover {
-    background-color: var(--color-bg-muted);
+.company-card__share:hover,
+.company-card__share:focus-visible {
+    background-color: var(--color-accent-soft);
     color: var(--color-accent);
-    border-color: var(--color-border);
+    border-color: var(--color-accent);
+    outline: none;
+    transform: scale(1.05);
+}
+.company-card__share:active {
+    transform: scale(0.96);
 }
 
 .company-card__meta {
@@ -845,9 +852,8 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
    -------------------------------------------------------------------------- */
 .toast-container {
     position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 24px;
+    right: 24px;
     z-index: 200;
     display: flex;
     flex-direction: column;
@@ -865,12 +871,12 @@ html { scroll-padding-top: calc(var(--header-h) + var(--controls-h)); }
     animation: toast-in 200ms ease;
 }
 @keyframes toast-in {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateX(12px); }
+    to   { opacity: 1; transform: translateX(0); }
 }
 .toast.is-leaving { animation: toast-out 200ms ease forwards; }
 @keyframes toast-out {
-    to { opacity: 0; transform: translateY(8px); }
+    to { opacity: 0; transform: translateX(12px); }
 }
 
 /* --------------------------------------------------------------------------
